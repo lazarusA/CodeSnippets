@@ -57,3 +57,13 @@ BedheadExamples = [
 attractorExamples = OrderedDict(Clifford => cliffordExamples, 
     De_Jong => De_JongExamples, Svensson => SvenssonExamples,
     Bedhead => BedheadExamples)
+
+function pkgsVersion()
+    println("Julia == " * string(VERSION))
+    for (key, version) ∈ sort(collect(Pkg.installed()))
+        try
+            isa(eval(Symbol(key)), Module) && println(key * " == " * string(version))
+        catch
+        end
+    end
+end
